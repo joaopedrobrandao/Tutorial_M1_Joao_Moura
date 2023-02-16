@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/MainScript01.gd" type="Script" id=1]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 3.0
+margin_right = 804.0
+margin_bottom = 403.0
+color = Color( 0.266667, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+margin_left = 17.0
+margin_top = 19.0
+margin_right = 406.0
+margin_bottom = 368.0
+
+[node name="Lista1" type="Button" parent="."]
+margin_left = 433.0
+margin_top = 63.0
+margin_right = 578.0
+margin_bottom = 128.0
+text = "Lista 1"
+
+[node name="Lista2" type="Button" parent="."]
+margin_left = 635.0
+margin_top = 60.0
+margin_right = 780.0
+margin_bottom = 125.0
+text = "Lista 2"
+
+[node name="lista3" type="Button" parent="."]
+margin_left = 436.0
+margin_top = 153.0
+margin_right = 581.0
+margin_bottom = 218.0
+text = "Lista 3"
+
+[node name="lista4" type="Button" parent="."]
+margin_left = 632.0
+margin_top = 148.0
+margin_right = 777.0
+margin_bottom = 213.0
+text = "Lista 4"
+
+[node name="CaixaDeTexto" type="LineEdit" parent="."]
+margin_left = 441.0
+margin_top = 285.0
+margin_right = 780.0
+margin_bottom = 385.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 489.0
+margin_top = 256.0
+margin_right = 746.0
+margin_bottom = 287.0
+text = "Utilize como entrada para as listas 2 e 4
+"
+
+[connection signal="pressed" from="Lista1" to="." method="_on_Lista1_pressed"]
+[connection signal="pressed" from="Lista2" to="." method="_on_Lista2_pressed"]
+[connection signal="pressed" from="lista3" to="." method="_on_lista3_pressed"]
+[connection signal="pressed" from="lista4" to="." method="_on_lista4_pressed"]
