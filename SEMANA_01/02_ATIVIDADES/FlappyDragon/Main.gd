@@ -39,10 +39,19 @@ func _process(delta):
 		if $dragon.position.y < -20:
 			$dragon.position.y = -20
 			
+		if $dragon.position.x < -20:
+			$dragon.position.x = -20
+			
 		# se apertou seta para baixo, aumenta o valor de y (posição vertical) do dragão
 		if Input.is_action_pressed("ui_down"):
 			$dragon.position.y += 4
-
+			
+		if Input.is_action_pressed("ui_right"):
+			$dragon.position.x += 4
+			
+		if Input.is_action_pressed("ui_left"):
+			$dragon.position.x -= 4
+			
 		# se apertou seta para cima, diminui o valor de y (posição vertical) do dragão
 		if Input.is_action_pressed("ui_up"):
 			$dragon.position.y -= 6
