@@ -8,7 +8,4 @@ func _on_Play_pressed():
 	get_tree().change_scene("res://Scenes/Historia.tscn")
 
 func _on_Credits_pressed():
-	get_tree().change_scene("res://Credits.tscn")
-
-func _on_Settings_pressed():
-	get_tree().change_scene("res://Settings.tscn")
+	get_tree().change_scene("res://Scenes/Credits.tscn")
