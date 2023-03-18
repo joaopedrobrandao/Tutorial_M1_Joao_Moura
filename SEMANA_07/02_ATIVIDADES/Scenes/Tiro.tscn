@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Tiro.gd" type="Script" id=1]
+[ext_resource path="res://imagens/bullet.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 41.1459, 21.1368 )
+
+[node name="Tiro" type="Sprite"]
+scale = Vector2( 0.668354, 0.638695 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="hitbox" type="Area2D" parent="." groups=["dano"]]
+
+[node name="col" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+scale = Vector2( 1.5, 1.5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -8.97728, -36.0109 )
+texture = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Sprite"]
+position = Vector2( -1, 1 )
+
+[node name="hitbox2" type="Area2D" parent="Sprite" groups=["dano"]]
+
+[node name="col2" type="CollisionShape2D" parent="Sprite/hitbox2"]
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( -10.4735, 34.4452 )
+texture = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Sprite2"]
+position = Vector2( 1, 1 )
+
+[node name="hitbox3" type="Area2D" parent="Sprite2" groups=["dano"]]
+
+[node name="col3" type="CollisionShape2D" parent="Sprite2/hitbox3"]
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 3 )
+
+[node name="Knock" type="Area2D" parent="." groups=["knock"]]
+position = Vector2( -26.9318, 0 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Knock" groups=["knock"]]
+position = Vector2( -26.9318, 4.69708 )
+scale = Vector2( 3.74191, 0.587227 )
+polygon = PoolVector2Array( 18.3932, -26.6625, 8.39689, -10.665, 17.9934, 10.665, 4.48864, -9.62746 )
+
+[node name="hitkill" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitkill" groups=["hitkill"]]
+position = Vector2( -47.1307, -0.782845 )
+shape = SubResource( 4 )
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_exited" from="Sprite/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_exited" from="Sprite2/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
