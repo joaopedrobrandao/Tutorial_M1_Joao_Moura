@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Node2D.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Node2D.gd" type="Script" id=1]
 [ext_resource path="res://imagens/shell.png" type="Texture" id=2]
 [ext_resource path="res://imagens/pixel-operator/PixelOperator-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://imagens/icon.png" type="Texture" id=4]

@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Biker.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Menu.gd" type="Script" id=2]
 [ext_resource path="res://Sounds/ReloadKRL-certp.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sounds/ES_The Glitch Train - Autohacker.wav" type="AudioStream" id=4]
+[ext_resource path="res://imagens/coracao_azul.png" type="Texture" id=5]
+[ext_resource path="res://imagens/pixel-operator/PixelOperator-Bold.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -18,6 +20,10 @@ extents = Vector2( 98.5, 329.75 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 83.5, 654.375 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 50
+font_data = ExtResource( 6 )
 
 [node name="Hotline" type="Control"]
 focus_mode = 2
@@ -55,7 +61,7 @@ rotation = 1.5708
 shape = SubResource( 3 )
 
 [node name="Biker" parent="." instance=ExtResource( 1 )]
-position = Vector2( 517, 244 )
+position = Vector2( 659, 322 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 591.0
@@ -66,27 +72,35 @@ rect_scale = Vector2( 2, 2 )
 
 [node name="Sprite0" type="Sprite" parent="."]
 position = Vector2( 40, 38 )
+z_index = 10
 
 [node name="Sprite1" type="Sprite" parent="."]
 position = Vector2( 65, 38 )
+z_index = 10
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 90, 38 )
+z_index = 10
 
 [node name="Sprite3" type="Sprite" parent="."]
 position = Vector2( 115, 38 )
+z_index = 10
 
 [node name="Sprite4" type="Sprite" parent="."]
 position = Vector2( 140, 38 )
+z_index = 10
 
 [node name="Sprite5" type="Sprite" parent="."]
 position = Vector2( 165, 38 )
+z_index = 10
 
 [node name="Sprite6" type="Sprite" parent="."]
 position = Vector2( 190, 38 )
+z_index = 10
 
 [node name="Sprite7" type="Sprite" parent="."]
 position = Vector2( 215, 38 )
+z_index = 10
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -98,7 +112,46 @@ one_shot = true
 [node name="Synthwave" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
+[node name="coracao" type="Sprite" parent="."]
+position = Vector2( 1096, 38 )
+scale = Vector2( 0.2, 0.2 )
+z_index = 10
+texture = ExtResource( 5 )
+
+[node name="coracao2" type="Sprite" parent="."]
+position = Vector2( 1136, 38 )
+scale = Vector2( 0.2, 0.2 )
+z_index = 10
+texture = ExtResource( 5 )
+
+[node name="coracao3" type="Sprite" parent="."]
+position = Vector2( 1176, 38 )
+scale = Vector2( 0.2, 0.2 )
+z_index = 10
+texture = ExtResource( 5 )
+
+[node name="coracao4" type="Sprite" parent="."]
+position = Vector2( 1216, 38 )
+scale = Vector2( 0.2, 0.2 )
+z_index = 10
+texture = ExtResource( 5 )
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 57.0
+margin_top = -11.0
+margin_right = 132.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 4 )
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Enemy2" type="Timer" parent="."]
+wait_time = 16.0
+autostart = true
+
 [connection signal="timeout" from="Enemy-Spawn" to="." method="_on_EnemySpawn_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="AudioStreamPlayer2D/recarregarkrl" to="." method="_on_recarregarkrl_timeout"]
+[connection signal="timeout" from="Enemy2" to="." method="_on_Enemy2_timeout"]

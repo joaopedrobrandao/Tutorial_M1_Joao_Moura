@@ -1,7 +1,7 @@
 extends Sprite
 var count = 0
 
-var velocidade = 95
+var velocidade = 180
 
 var mov = Vector2.ZERO
 
@@ -11,7 +11,7 @@ var atordoado = false
 
 var recuo = 9
 
-var vida = 4
+var vida = 200
 
 var particula_sangue = preload("res://Scenes/particula_sangue.tscn")
 
@@ -26,15 +26,26 @@ func _process(delta: float) -> void:
 		
 		var instancia_particual_sangue = Global.instance_node(particula_sangue, global_position, Global.criacao_no_pai)
 		instancia_particual_sangue.rotation = mov.angle()
-		Global.pontuacao += 100
+		Global.pontuacao += 1000
 		queue_free()
 
+	if  vida <= 100:
+		modulate = Color("d90000")
+		velocidade = 220
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("dano"):
-		modulate = Color.chartreuse
 		area.get_parent().queue_free()
+		vida -= 2
+
+	if area.is_in_group("danudo"):
+		modulate = Color.chartreuse
+		modulate = Color("177c00")
+		vida -= 6
+
+	if area.is_in_group("chumbinho"):
+		modulate = Color.chartreuse
 		modulate = Color("177c00")
 		vida -= 1.5
 
@@ -48,6 +59,4 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		vida -= 4
 
 func _on_recuo_timeout():
-	modulate = Color("105500")
 	atordoado = false
-	pass # Replace with function body.

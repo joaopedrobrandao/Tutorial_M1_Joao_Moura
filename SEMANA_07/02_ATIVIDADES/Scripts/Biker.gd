@@ -1,18 +1,13 @@
 extends KinematicBody2D
 
-var velocidade = 10
+var velocidade = 300
 var mov = Vector2.ZERO
-var a 
-var b
-var c
-var d
 var delay = false
-var hp = 4
-
-var projetil = preload("res://Scenes//Tiro.tscn")
-
 var couldown = false
-
+var magnum = preload("res://imagens/Magnum_mao_V2.png")
+var Ak47 = preload("res://imagens/Ak47-hotline.png")
+var Spas = preload("res://imagens/mao-godot-v4 (1).png")
+var pos = Vector2(0,0)
 
 func _enter_tree() -> void:
 	Global.jogador = null
@@ -20,70 +15,60 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	Global.jogador = self
-	a = mov.x + 30
-	b = mov.x - 30
-	c = mov.y + 30
-	d = mov.y - 30
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("direita"):
-		mov.x += 2
-		if mov.x >= a:
-			mov.x = 20
-
-	elif Input.is_action_pressed("esquerda"):
-		mov.x -= 2
-		if mov.x <= b:
-			mov.x = -20
-
-	elif Input.is_action_pressed("baixo"):
-		mov.y += 2
-		if mov.y >= c:
-			mov.y = 20
-
-	elif Input.is_action_pressed("cima"):
-		mov.y -= 2
-		if mov.y <= d:
-			mov.y = -20
-
+	pos = self.position
+	Global.player_pos = pos
+	mov.x = int(Input.is_action_pressed("direita")) - int(Input.is_action_pressed("esquerda"))
+	mov.y = int(Input.is_action_pressed("baixo")) - int(Input.is_action_pressed("cima"))
 
 	global_position += velocidade * mov * delta
 
-	if $".".position.x > 1300 or $".".position.x < -30 or $".".position.y < -30 or $".".position.y > 670:
-		$".".position.x = 517
-		$".".position.y = 244
-		print("There is no escape")
+	if $".".position.x > 1300:
+		$".".position.x = 0
+	if $".".position.x < -30:
+		$".".position.x = 1300
+	if $".".position.y < -30:
+		$".".position.y = 660
+	if $".".position.y > 670:
+		$".".position.y = 0
 
+	if Global.arma == 0:
+		$Spas.texture = Spas
+		$Spas.scale = Vector2(0.15, 0.15)
+		$Spas.offset.x = 120
+		$Spas.offset.x -= 10
+		$Spas.offset.y = -180
+
+	if Global.arma == 1:
+		$Spas.texture = magnum
+		$Spas.scale = Vector2(0.2, 0.2)
+		$Spas.offset.x = 20
+		$Spas.offset.x -= 50
+
+	if Global.arma == 2:
+		$Spas.texture = Ak47
+		$Spas.scale = Vector2(0.2, 0.2)
+		$Spas.offset.y = -180
+		$Spas.offset.x = 160
+
+	if Global.hp <= 0:
+		Global.recarregado = false
+		visible = false
+		yield(get_tree().create_timer(1), "timeout")
+		get_tree().reload_current_scene()
 
 func _on_hitboxP_area_entered(area: Area2D) -> void:
-	if area.is_in_group("barreira"):
-		if mov.x > 0:
-			mov.x = 10
-		else:
-			mov.x = -10
-		if mov.y > 0:
-			mov.y = 10
-		else:
-			mov.y = -10
-		mov.x = mov.x * -1
-		mov.y = mov.y * -1
 	if area.is_in_group("inimigo"):
-		if mov.x > 0:
-			mov.x = 17
-		else:
-			mov.x = -17
-		if mov.y > 0:
-			mov.y = 17
-		else:
-			mov.y = -17
-		mov.x = mov.x * -1
-		mov.y = mov.y * -1
-		hp -= 1
-		if hp <= 0:
-			Global.recarregado = false
-			visible = false
-			yield(get_tree().create_timer(1), "timeout")
-			get_tree().reload_current_scene()
-	
-	
-	pass # Replace with function body.
+		Global.hp -= 1
+		area.get_parent().queue_free()
+
+	if area.is_in_group("boss"):
+		Global.hp -= 1
+
+	if Global.hp <= 0:
+		Global.recarregado = false
+		visible = false
+		yield(get_tree().create_timer(1), "timeout")
+		get_tree().reload_current_scene()
+

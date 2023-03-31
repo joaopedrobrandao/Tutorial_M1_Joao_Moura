@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/ProjetilMagnum.gd" type="Script" id=1]
+[ext_resource path="res://imagens/BALA (4).png" type="Texture" id=2]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+z_index = -9
+amount = 1
+lifetime = 0.7
+explosiveness = 1.0
+texture = ExtResource( 2 )
+spread = 19.51
+gravity = Vector2( 0, 40 )
+initial_velocity = 250.0
+initial_velocity_random = 0.7
+angular_velocity = 1000.0
+angular_velocity_random = 0.25
+scale_amount = 0.5
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[node name="sumir" type="Timer" parent="."]
+wait_time = 25.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

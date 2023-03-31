@@ -1,13 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://imagens/Spas-true.png" type="Texture" id=1]
 [ext_resource path="res://imagens/pixel-operator/PixelOperator.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Scenes/Historia.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Historia.gd" type="Script" id=3]
 [ext_resource path="res://imagens/mao-godot-v4 (1).png" type="Texture" id=4]
+[ext_resource path="res://imagens/Magnum_mao_V2.png" type="Texture" id=5]
+[ext_resource path="res://imagens/Ak47-hotline.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
 font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 1200, 600 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 1200, 600 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 1200, 600 )
+margin_bottom = 3.71464
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
@@ -25,14 +40,34 @@ Você vai ajudar o Godot nessa luta pelas game engines? Se sim pegue sua arma e 
 autowrap = true
 
 [node name="Play" type="TextureButton" parent="."]
-margin_left = 397.0
-margin_top = 445.0
-margin_right = 1597.0
-margin_bottom = 1045.0
-rect_scale = Vector2( 0.366018, 0.366018 )
+margin_left = 117.0
+margin_top = 472.0
+margin_right = 1317.0
+margin_bottom = 1072.0
+rect_scale = Vector2( 0.274342, 0.274342 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 1 )
 texture_hover = ExtResource( 4 )
 
+[node name="Play2" type="Button" parent="."]
+margin_left = 447.0
+margin_top = 474.0
+margin_right = 1647.0
+margin_bottom = 1074.0
+rect_scale = Vector2( 0.315492, 0.315492 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 876.0
+margin_top = 480.0
+margin_right = 1676.0
+margin_bottom = 880.0
+rect_scale = Vector2( 0.480182, 0.480182 )
+texture_normal = ExtResource( 6 )
+
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Play2" to="." method="_on_Play2_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
