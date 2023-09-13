@@ -28,12 +28,12 @@ func _process(delta: float) -> void:
 		if str(Global.projetil) == str(comparation):
 			var instancia_particual_sangue = Global.instance_node(particula_sangue, global_position, Global.criacao_no_pai)
 			instancia_particual_sangue.rotation = mov.angle() + 160
-			Global.pontuacao += 100
+			Global.pontuacao += 100 * Global.pontos
 			queue_free()
 		else:
 			var instancia_particual_sangue = Global.instance_node(particula_sangue, global_position, Global.criacao_no_pai)
 			instancia_particual_sangue.rotation = mov.angle()
-			Global.pontuacao += 100
+			Global.pontuacao += 100 * Global.pontos
 			queue_free()
 
 
@@ -52,7 +52,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("chumbinho"):
 		modulate = Color.chartreuse
 		modulate = Color("177c00")
-		vida -= 1
+		vida -= 1.9
 
 	if area.is_in_group("knock"):
 		mov = -mov * recuo

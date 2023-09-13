@@ -8,6 +8,7 @@ var magnum = preload("res://imagens/Magnum_mao_V2.png")
 var Ak47 = preload("res://imagens/Ak47-hotline.png")
 var Spas = preload("res://imagens/mao-godot-v4 (1).png")
 var pos = Vector2(0,0)
+var espera = false
 
 func _enter_tree() -> void:
 	Global.jogador = null
@@ -23,6 +24,19 @@ func _process(delta: float) -> void:
 	mov.y = int(Input.is_action_pressed("baixo")) - int(Input.is_action_pressed("cima"))
 
 	global_position += velocidade * mov * delta
+
+	if Input.is_action_just_pressed("dash") and espera != true:
+		espera = true
+		velocidade = 900
+		$hitboxP/CollisionShape2D.disabled = true
+		$Timer.start()
+		$Timer2.start()
+
+	if Global.character == 1:
+		Global.pontos = 2
+
+	if Global.character == 2:
+		pass
 
 	if $".".position.x > 1300:
 		$".".position.x = 0
@@ -72,3 +86,13 @@ func _on_hitboxP_area_entered(area: Area2D) -> void:
 		yield(get_tree().create_timer(1), "timeout")
 		get_tree().reload_current_scene()
 
+
+
+func _on_Timer_timeout():
+	velocidade = 300
+	$hitboxP/CollisionShape2D.disabled = false
+
+
+
+func _on_Timer2_timeout():
+	espera = false

@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		else:
 			var instancia_particual_sangue = Global.instance_node(particula_sangue, global_position, Global.criacao_no_pai)
 			instancia_particual_sangue.rotation = mov.angle()
-			Global.pontuacao += 200
+			Global.pontuacao += 200 * Global.pontos
 			queue_free()
 
 

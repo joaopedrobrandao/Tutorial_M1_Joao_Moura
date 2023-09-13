@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 		
 		var instancia_particual_sangue = Global.instance_node(particula_sangue, global_position, Global.criacao_no_pai)
 		instancia_particual_sangue.rotation = mov.angle()
-		Global.pontuacao += 1000
+		Global.pontuacao += 1000  * Global.pontos
 		queue_free()
 
 	if  vida <= 100:
@@ -47,6 +47,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("chumbinho"):
 		modulate = Color.chartreuse
 		modulate = Color("177c00")
+		area.get_parent().queue_free()
 		vida -= 1.5
 
 	if area.is_in_group("knock"):

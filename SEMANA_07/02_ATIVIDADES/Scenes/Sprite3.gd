@@ -8,6 +8,10 @@ func _ready():
 	delay = false
 
 func _process(delta: float) -> void:
+	
+	if Global.character == 2:
+		$"../../TempoEntreAK".wait_time = 0.05
+	
 	look_at(get_global_mouse_position())
 	if Global.arma == 2:
 		Global.projetil = preload("res://Scenes//Chumbo.tscn")
@@ -17,9 +21,9 @@ func _process(delta: float) -> void:
 			Global.municao += 1
 			Global.couldown = true
 			$"../../TempoEntreAK".start()
-			if Global.municao == 30:
+			if Global.municao == 40:
 				Global.recarregado = false
-
+	
 
 func _on_TempoEntreAK_timeout():
 	Global.couldown = false

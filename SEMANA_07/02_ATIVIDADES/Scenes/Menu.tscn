@@ -106,7 +106,7 @@ z_index = 10
 stream = ExtResource( 3 )
 
 [node name="recarregarkrl" type="Timer" parent="AudioStreamPlayer2D"]
-wait_time = 3.18
+wait_time = 2.888
 one_shot = true
 
 [node name="Synthwave" type="AudioStreamPlayer2D" parent="."]

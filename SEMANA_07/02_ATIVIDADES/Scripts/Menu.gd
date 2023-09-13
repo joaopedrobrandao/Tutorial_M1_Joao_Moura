@@ -10,6 +10,7 @@ var click = 0
 var repeat = true
 var acabou = false
 var chefao = true
+var jata = false
 
 func _ready() -> void:
 	for child in self.get_children():
@@ -43,7 +44,7 @@ func _ready() -> void:
 	if Global.arma == 2:
 		get_node("Sprite0").texture = municao
 		$Sprite0.scale = Vector2(0.2, 0.2)
-		$Label2.text = str(30 - Global.municao)
+		$Label2.text = str(40 - Global.municao)
 
 func _exit_tree() -> void:
 	Global.criacao_no_pai = null
@@ -57,6 +58,13 @@ func _process(delta):
 	
 	if Global.pontuacao >= 4500:
 		acabou = true
+
+
+	if Input.is_action_just_pressed("recarregar") and repeat and Global.municao != 0:
+		Global.recarregado = false
+		repeat = false
+		$AudioStreamPlayer2D.play()
+		recarregamento()
 
 	if Global.arma == 0:
 		if Global.municao == 1:
@@ -77,6 +85,7 @@ func _process(delta):
 			get_node("Sprite0").texture = Eshell
 
 		if Global.municao == 8 and repeat:
+			jata = true
 			repeat = false
 			$AudioStreamPlayer2D.play()
 			recarregamento()
@@ -96,13 +105,15 @@ func _process(delta):
 			get_node("Sprite0").texture = Eshell
 
 		if Global.municao == 6 and repeat:
+			jata = true
 			repeat = false
 			$AudioStreamPlayer2D.play()
 			recarregamento()
 
 	if Global.arma == 2:
-		$Label2.text = str(30 - Global.municao)
-		if Global.municao == 30 and repeat:
+		$Label2.text = str(40 - Global.municao)
+		if Global.municao == 40 and repeat:
+			jata = true
 			repeat = false
 			$AudioStreamPlayer2D.play()
 			recarregamento()
@@ -115,6 +126,8 @@ func _process(delta):
 		get_node("coracao2").texture = null
 	elif Global.hp == 0:
 		get_node("coracao").texture = null
+
+
 
 func _on_Timer_timeout():
 	Global.municao = 0
@@ -179,6 +192,7 @@ func _on_recarregarkrl_timeout():
 		get_node("Sprite5").texture = Bala
 	if Global.arma == 2:
 		get_node("Sprite0").texture = municao
+	jata = false
 	repeat = true
 
 

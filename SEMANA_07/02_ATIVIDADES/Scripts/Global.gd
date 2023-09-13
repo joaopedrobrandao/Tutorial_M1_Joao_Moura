@@ -1,6 +1,6 @@
 extends Node
 var criacao_no_pai = null
-var municao = 0
+var municao = -9999
 var recarregado = true
 var reset = false
 var jogador = null
@@ -13,10 +13,12 @@ var player_pos = Vector2(0,0)
 var rng = RandomNumberGenerator.new()
 var angle
 var angle2
+var character = 2
+var pontos = 1
 
 func _process(delta):
 	randomize()
-	angle = rng.randf_range(-0.4,0.4)
+	angle = rng.randf_range(-0.2,0.2)
 	angle2 = rng.randf_range(-0.2,0.2)
 
 func instance_node(node, location, parent):
